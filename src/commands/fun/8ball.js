@@ -50,14 +50,35 @@ module.exports = {
 			"Yes this is a simulation, wake up",
 			"You really just gonna collect these L's huh",
 			"Damn bro, here just take this L and leave",
+			"Sir, this is Wendy's",
+			"No comment",
+			"Just like the simulations!",
+			"Oh god, this isn't like the simulations at all!",
+			"S H U T",
+			"I forgor",
+			"Damn, I ain't saying that's fucked up, but... that's fucked up",
+			"I am going to say this as nicely as I can, no",
+			"Please no...",
+			"Please don't",
+			"Just don't",
+			"How about Nooooooo",
+			"Only a Maidenless fool would ask such a question",
+			"Roger Roger",
+			"42?",
+			"Now you just hold on a minute",
+			"Nani the fuck?",
+			"Uh...huh...",
+			"yeah sure, go for it...",
+			"I will send you the Jesus",
+			"EMOTIONAL DAMAGE",
 		];
 
 		const question = interaction.options.getString("question");
 		const answer = Math.floor(Math.random() * options.length);
 		//${options[answer]}
 		const embed = new EmbedBuilder()
-			.setTitle("Magic 8ball says:")
-			.setDescription(`You asked ${question}`)
+			.setTitle("You asked:")
+			.setDescription(`${question}`)
 			.addFields([
 				{
 					name: `Magic 8ball says:`,
