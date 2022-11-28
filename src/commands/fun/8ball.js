@@ -71,6 +71,17 @@ module.exports = {
 			"yeah sure, go for it...",
 			"I will send you the Jesus",
 			"EMOTIONAL DAMAGE",
+			"Soon™",
+			"This is the part where you die (This is the part where you die)",
+			"Cope",
+			"Cope?",
+			"Oh shure bud",
+			"My sources say yes, but my source is a random article from twitter",
+			"My sources say yes, but my source is a random article from twitter",
+			"My sources say no, but my source is a random article from reddit",
+			"My sources say no, but my source is a random article from reddit",
+			"Sorry who are you again?",
+			"Cope + Seeth + Mald"
 		];
 
 		const question = interaction.options.getString("question");
