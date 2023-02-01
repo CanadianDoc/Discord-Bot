@@ -26,12 +26,9 @@ module.exports = (bot) => {
 		try {
 			console.log("Loading Commands");
 
-			await rest.put(
-				Routes.applicationCommands(process.env.BOT_ID, process.env.GUILD_ID),
-				{
-					body: bot.commandArray,
-				}
-			);
+			await rest.put(Routes.applicationCommands(process.env.BOT_ID), {
+				body: bot.commandArray,
+			});
 
 			console.log(tableC.toString());
 		} catch (err) {

@@ -6,9 +6,12 @@ const {
 	Activity,
 	ActivityType,
 } = require("discord.js");
+
 const fs = require("fs");
 
-const bot = new Client({ intents: GatewayIntentBits.Guilds });
+const bot = new Client({
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
+});
 bot.commands = new Collection();
 bot.buttons = new Collection();
 bot.commandArray = [];
@@ -22,6 +25,13 @@ for (const folder of functionFolders) {
 		require(`./functions/${folder}/${file}`)(bot);
 	}
 }
+
+bot.on("guildMemberAdd", (member) => {
+	const role = process.env.newbieRole;
+	const autorole = member.guild.roles.cache.get(role);
+	if (!autorole) return console.log("No role found");
+	member.roles.add(autorole);
+});
 
 bot.eventHandler();
 bot.commandHandler();
