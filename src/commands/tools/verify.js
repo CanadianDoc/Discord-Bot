@@ -10,7 +10,7 @@ const {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("createverify")
-		.setDescription("Sets up your verification channel")
+		.setDescription("Sets up your verification channel...")
 		.addChannelOption((option) =>
 			option
 				.setName("channel")
