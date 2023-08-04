@@ -23,7 +23,7 @@ module.exports = {
       content = `Hey, who's coming? ${role}`;
     }
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setDescription(content)
       .setTitle("Roll Call")
       .setColor("Random")
