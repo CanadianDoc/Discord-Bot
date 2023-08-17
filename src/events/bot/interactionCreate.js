@@ -43,12 +43,10 @@ module.exports = {
           }
           break;
 
-        default:
-          {
-            console.log("No customId associated with this button");
-            return new Error("No customId associated with this button");
-          }
-          break;
+        default: {
+          console.log("No customId associated with this button");
+          return new Error("No customId associated with this button");
+        }
       }
 
       try {
