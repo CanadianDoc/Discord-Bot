@@ -23,11 +23,11 @@ function adjustVotes(embed, prevVoteData, newVote, username) {
   if (newField.value === "" || !newField.value) {
     newField.value = username;
   } else {
-    newField.value += `, ${username}`;
+    newField.value += `\n${username}`;
   }
   getFieldByName(
     `# of ${newVote.charAt(0).toUpperCase() + newVote.slice(1)}`
-  ).value = newField.value.split(", ").length.toString();
+  ).value = newField.value.split("\n").length.toString();
 }
 
 module.exports = {
