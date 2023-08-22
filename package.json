@@ -17,6 +17,7 @@
     "ascii-table": "^0.0.9",
     "discord-api-types": "^0.37.18",
     "discord.js": "^14.12.1",
+    "mongoose": "^7.4.3",
     "node-fetch": "^3.3.1"
   },
   "devDependencies": {

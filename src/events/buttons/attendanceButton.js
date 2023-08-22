@@ -1,6 +1,5 @@
-const { ButtonInteraction } = require("discord.js");
-
-const votes = new Map();
+const { loadData, saveData } = require("../bot/db");
+const votes = loadData("attendance");
 
 function adjustVotes(embed, prevVoteData, newVote, username) {
   const getFieldByName = (name) =>
@@ -35,6 +34,7 @@ module.exports = {
     name: "attendance",
     description: "handles attendance buttons",
   },
+
   async execute(interaction) {
     if (!interaction.isButton()) return;
 
@@ -42,7 +42,10 @@ module.exports = {
     if (arr[0] !== "attendance") return;
 
     const userVoteId = `${interaction.user.id}-${interaction.message.id}`;
+
+    const votes = await loadData("attendance");
     const userVotedData = votes.get(userVoteId);
+
     const newVote = arr[1];
     const username = interaction.user.username;
 
@@ -62,7 +65,15 @@ module.exports = {
       });
     } else {
       adjustVotes(embed, userVotedData, newVote, username);
-      votes.set(userVoteId, { vote: newVote, username: username });
+      saveData(
+        {
+          userId: interaction.user.id,
+          messageId: interaction.message.id,
+          vote: newVote,
+          username: username,
+        },
+        "attendance"
+      );
     }
 
     interaction.message.edit({ embeds: [embed] });

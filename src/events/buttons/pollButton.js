@@ -1,19 +1,5 @@
-const { ButtonInteraction } = require("discord.js");
-const fs = require("fs");
-const path = require("path");
-
-const votesFilePath = path.join(__dirname, "..", "..", "data", "votes.json");
-
-const loadVotes = () => {
-  const data = fs.readFileSync(votesFilePath, "utf8");
-  return new Map(JSON.parse(data));
-};
-
-const saveVotes = (votes) => {
-  fs.writeFileSync(votesFilePath, JSON.stringify([...votes]), "utf8");
-};
-
-const votes = loadVotes();
+const { loadData, saveData } = require("../bot/db");
+const votes = loadData("poll");
 
 function adjustVotes(embed, prevVote, newVote) {
   const getFieldByName = (name) =>
@@ -35,6 +21,7 @@ module.exports = {
     name: "poll",
     description: "handles poll buttons",
   },
+
   async execute(interaction) {
     if (!interaction.isButton()) return;
 
@@ -42,7 +29,10 @@ module.exports = {
     if (arr[0] !== "poll") return;
 
     const userVoteId = `${interaction.user.id}-${interaction.message.id}`;
+
+    const votes = await loadData("poll");
     const userVoted = votes.get(userVoteId);
+
     const newVote = arr[1];
 
     const embed = interaction.message.embeds[0];
@@ -61,8 +51,14 @@ module.exports = {
       });
     } else {
       adjustVotes(embed, userVoted, newVote);
-      votes.set(userVoteId, newVote);
-      saveVotes(votes);
+      saveData(
+        {
+          userId: interaction.user.id,
+          messageId: interaction.message.id,
+          vote: newVote,
+        },
+        "poll"
+      );
     }
 
     interaction.message.edit({ embeds: [embed] });
