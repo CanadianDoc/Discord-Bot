@@ -1,5 +1,4 @@
 const { loadData, saveData } = require("../bot/db");
-const votes = loadData("attendance");
 
 function adjustVotes(embed, prevVoteData, newVote, username) {
   const getFieldByName = (name) =>
@@ -43,8 +42,11 @@ module.exports = {
 
     const userVoteId = `${interaction.user.id}-${interaction.message.id}`;
 
-    const votes = await loadData("attendance");
-    const userVotedData = votes.get(userVoteId);
+    const userVotedData = await loadData(
+      "attendance",
+      interaction.user.id,
+      interaction.message.id
+    );
 
     const newVote = arr[1];
     const username = interaction.user.username;

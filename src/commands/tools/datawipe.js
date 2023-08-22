@@ -14,7 +14,6 @@ module.exports = {
         .addChoices(
           { name: "Poll", value: "poll" },
           { name: "Attendance", value: "attendance" },
-          { name: "Inventory", value: "inventory" },
           { name: "All", value: "all" }
         )
     )
