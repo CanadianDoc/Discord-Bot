@@ -1,2 +1,1 @@
-# Discord Bot Project
- 
+# Discord Bot Project for NRC
