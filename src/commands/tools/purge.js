@@ -3,7 +3,7 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("purge")
-		.setDescription("Let us purge these heretical messages!...")
+		.setDescription("Let us purge these heretical messages!. . .")
 		.addNumberOption((option) =>
 			option
 				.setName("amount")

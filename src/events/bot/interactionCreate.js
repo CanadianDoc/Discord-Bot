@@ -19,40 +19,19 @@ module.exports = {
         });
       }
     } else if (interaction.isButton()) {
+      const { buttons } = bot;
       const { customId } = interaction;
-      const [type, action, id] = customId.split("-");
-
-      let buttonHandler;
-
-      switch (type) {
-        case "poll":
-          {
-            buttonHandler = require("../buttons/pollButton.js");
-          }
-          break;
-
-        case "attendance":
-          {
-            buttonHandler = require("../buttons/attendanceButton.js");
-          }
-          break;
-
-        case "role":
-          {
-            buttonHandler = require("../buttons/roleButton.js");
-          }
-          break;
-
-        default: {
-          console.log("No customId associated with this button");
-          return new Error("No customId associated with this button");
-        }
-      }
+      const button = buttons.get(customId); //maybe error on this line :)
+      if (!button) return new Error("no custom ID for this button");
 
       try {
-        await buttonHandler.execute(interaction, bot);
+        await button.execute(interaction, bot); //
       } catch (err) {
-        console.log(err);
+        console.error(err);
+        await interaction.reply({
+          contents: `Something went wrong while executing this button, please inform Doc about it thank you!`,
+          ephemeral: true,
+        });
       }
     }
   },

@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("serverinfo")
-    .setDescription("Displays all the information about this server"),
+    .setDescription("Displays all the information about this server. . ."),
 
   async execute(interaction, bot) {
     const members = interaction.guild.memberCount;
