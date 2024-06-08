@@ -24,8 +24,6 @@ module.exports = (bot) => {
 
     const rest = new REST({ version: "10" }).setToken(process.env.token);
     try {
-      console.log("Loading Commands");
-
       await rest.put(Routes.applicationCommands(process.env.BOT_ID), {
         body: bot.commandArray,
       });

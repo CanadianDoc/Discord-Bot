@@ -1,4 +1,5 @@
 const fs = require("fs");
+
 const ascii = require("ascii-table");
 const tableB = new ascii().setHeading("Buttons", "Status");
 
@@ -19,6 +20,7 @@ module.exports = (bot) => {
             buttons.set(button.data.name, button);
             tableB.addRow(`${button.data.name}`, "loaded");
           }
+          console.log(tableB.toString());
           break;
 
         default:
@@ -26,5 +28,4 @@ module.exports = (bot) => {
       }
     }
   };
-  console.log(tableB.toString());
 };

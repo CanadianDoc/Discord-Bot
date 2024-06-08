@@ -21,11 +21,11 @@ module.exports = {
     } else if (interaction.isButton()) {
       const { buttons } = bot;
       const { customId } = interaction;
-      const button = buttons.get(customId); //maybe error on this line :)
+      const button = buttons.get(customId);
       if (!button) return new Error("no custom ID for this button");
 
       try {
-        await button.execute(interaction, bot); //
+        await button.execute(interaction, bot);
       } catch (err) {
         console.error(err);
         await interaction.reply({
