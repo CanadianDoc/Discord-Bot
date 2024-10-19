@@ -1,0 +1,37 @@
+const { SlashCommandBuilder } = require("discord.js");
+const { Configuration, OpenAIApi } = require("openai");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("chat")
+    .setDescription("Chat with DocAI. . .")
+    .addStringOption((option) =>
+      option
+        .setName("message")
+        .setDescription("What would you like to say?")
+        .setRequired(true)
+    ),
+  async execute(interaction, bot) {
+    const configuration = new Configuration({
+      apiKey: process.env.openAIKEY,
+    });
+    const openai = new OpenAIApi(configuration);
+
+    const userMessage = interaction.options.getString("message");
+
+    try {
+      const response = await openai.createChatCompletion({
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: userMessage }],
+      });
+
+      const botReply = response.data.choices[0].message.content;
+      await interaction.reply(botReply);
+    } catch (error) {
+      console.error("Error with OpenAI API:", error);
+      await interaction.reply(
+        "Sorry, I couldn't respond. Please try again later."
+      );
+    }
+  },
+};
