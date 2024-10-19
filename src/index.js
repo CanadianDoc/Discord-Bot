@@ -27,6 +27,10 @@ for (const folder of functionFolders) {
 }
 
 bot.on("guildMemberAdd", (member) => {
+  const role = process.env.newbieRole;
+  const autorole = member.guild.roles.cache.get(role);
+  if (!autorole) return console.log("No role found");
+  member.roles.add(autorole);
   const channel = member.guild.channels.cache.get(process.env.welcomeChannelID);
   if (channel) {
     channel.send(
@@ -35,13 +39,6 @@ bot.on("guildMemberAdd", (member) => {
   } else {
     console.error("Welcome channel not found");
   }
-});
-
-bot.on("guildMemberAdd", (member) => {
-  const role = process.env.newbieRole;
-  const autorole = member.guild.roles.cache.get(role);
-  if (!autorole) return console.log("No role found");
-  member.roles.add(autorole);
 });
 
 bot.eventHandler();
