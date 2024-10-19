@@ -27,6 +27,17 @@ for (const folder of functionFolders) {
 }
 
 bot.on("guildMemberAdd", (member) => {
+  const channel = member.guild.channels.cache.get(process.env.welcomeChannelID);
+  if (channel) {
+    channel.send(
+      `Welcome to the server ${member}!\nPlease ping <@&${process.env.staffRoleID}> to get started!`
+    );
+  } else {
+    console.error("Welcome channel not found");
+  }
+});
+
+bot.on("guildMemberAdd", (member) => {
   const role = process.env.newbieRole;
   const autorole = member.guild.roles.cache.get(role);
   if (!autorole) return console.log("No role found");
