@@ -4,6 +4,7 @@ const {
   EmbedBuilder,
   ActionRowBuilder,
   SlashCommandBuilder,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 function createRoleButton(roleId) {
