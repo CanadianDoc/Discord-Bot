@@ -24,7 +24,7 @@ module.exports = {
         .setDescription("The role to give to the user.")
         .setRequired(true)
     )
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
   async execute(interaction, bot) {
     const role = interaction.options.getRole("role");
