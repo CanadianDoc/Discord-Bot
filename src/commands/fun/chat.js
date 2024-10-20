@@ -36,9 +36,10 @@ module.exports = {
       await interaction.reply(botReply);
     } catch (error) {
       console.error("Error with OpenAI API:", error);
-      await interaction.reply(
-        "Sorry, something went wrong. Please try again later."
-      );
+      await interaction.reply({
+        content: `Something went wrong while executing this button, please inform the dev\n🧩 <@351211709492363264>`,
+        ephemeral: true,
+      });
     }
   },
 };

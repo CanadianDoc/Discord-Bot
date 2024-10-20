@@ -1,6 +1,7 @@
 const fs = require("fs");
 const ascii = require("ascii-table");
 const tableB = new ascii().setHeading("Button", "Status");
+const tableM = new ascii().setHeading("Modal", "Status");
 
 module.exports = (bot) => {
   bot.componentHandler = async () => {
@@ -11,6 +12,7 @@ module.exports = (bot) => {
         .filter((file) => file.endsWith(".js"));
 
       const { buttons } = bot;
+      const { modals } = bot;
 
       switch (folder) {
         case "buttons":
@@ -20,6 +22,15 @@ module.exports = (bot) => {
             tableB.addRow(button.data.name, "Loaded");
           }
           console.log(tableB.toString());
+          break;
+
+        case "modals":
+          for (const file of componentFiles) {
+            const modal = require(`../../components/${folder}/${file}`);
+            modals.set(modal.data.customId, modal);
+            tableM.addRow(modal.data.customId, "Loaded");
+          }
+          console.log(tableM.toString());
           break;
 
         default:

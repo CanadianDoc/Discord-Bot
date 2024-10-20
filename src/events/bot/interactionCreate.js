@@ -50,6 +50,19 @@ module.exports = {
           });
         }
       }
+    } else if (interaction.isModalSubmit()) {
+      const modal = bot.modals.get(interaction.customId);
+      if (!modal) return new Error("No custom ID for this modal");
+
+      try {
+        await modal.execute(interaction, bot);
+      } catch (err) {
+        console.error(err);
+        await interaction.reply({
+          content: `Something went wrong while executing this modal, please inform the dev\n🧩 <@351211709492363264>`,
+          ephemeral: true,
+        });
+      }
     }
   },
 };

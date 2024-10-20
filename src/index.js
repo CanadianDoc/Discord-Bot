@@ -5,15 +5,21 @@ const {
   GatewayIntentBits,
   Activity,
   ActivityType,
+  Partials,
 } = require("discord.js");
 
 const fs = require("fs");
 
 const bot = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 bot.commands = new Collection();
 bot.buttons = new Collection();
+bot.modals = new Collection();
 bot.commandArray = [];
 
 const functionFolders = fs.readdirSync(`./src/functions`);
