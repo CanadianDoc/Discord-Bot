@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setName("chat")
     .setDescription("Chat with DocAI. . .")
     .addStringOption((option) =>
