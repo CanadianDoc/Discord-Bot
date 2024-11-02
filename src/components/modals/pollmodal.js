@@ -40,7 +40,7 @@ module.exports = {
       await pollMessage.react("🛑");
 
       if (hasNeutralvote) {
-        await pollMessage.react("❓");
+        await pollMessage.react("🔄");
       }
 
       await interaction.reply({
