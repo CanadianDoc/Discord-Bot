@@ -4,6 +4,7 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 module.exports = {
@@ -21,7 +22,8 @@ module.exports = {
         .setName("expire")
         .setDescription("How long until the buttons expire (minutes)")
         .setRequired(true)
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
   async execute(interaction, bot) {
     const title = interaction.options.getString("title");
     const buttons_expire = interaction.options.getInteger("expire");
