@@ -38,7 +38,7 @@ module.exports = {
     });
 
     const embed = new EmbedBuilder()
-      .setColor("#000000")
+      .setColor("Random")
       .setTitle(title)
       .addFields(
         { name: "Yes", value: "0", inline: true },
