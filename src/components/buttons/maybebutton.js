@@ -66,20 +66,39 @@ module.exports = {
         });
     }
 
+    totalParticipants =
+      participationEvent.yes.length +
+      participationEvent.maybe.length +
+      participationEvent.no.length;
     participationEvent.embed.setFields(
       {
-        name: "Yes",
-        value: `${participationEvent.yes.length} votes\n${participationEvent.yes}`,
+        name: `Yes (${Math.round(
+          (participationEvent.yes.length / totalParticipants) * 100,
+          2
+        )}%)`,
+        value: `${
+          participationEvent.yes.length
+        } votes\n${participationEvent.yes.join("\n")}`,
         inline: true,
       },
       {
-        name: "No",
-        value: `${participationEvent.no.length} votes\n${participationEvent.no}`,
+        name: `No (${Math.round(
+          (participationEvent.no.length / totalParticipants) * 100,
+          2
+        )}%)`,
+        value: `${
+          participationEvent.no.length
+        } votes\n${participationEvent.no.join("\n")}`,
         inline: true,
       },
       {
-        name: "Maybe",
-        value: `${participationEvent.maybe.length} votes\n${participationEvent.maybe}`,
+        name: `Maybe (${Math.round(
+          (participationEvent.maybe.length / totalParticipants) * 100,
+          2
+        )}%)`,
+        value: `${
+          participationEvent.maybe.length
+        } votes\n${participationEvent.maybe.join("\n")}`,
         inline: true,
       }
     );
