@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+const { DateTime } = require("luxon"); // ✅ Import Luxon
 
 const settingsPath = path.join(__dirname, "../../serverData.json");
 
@@ -13,42 +14,35 @@ module.exports = {
     const guildId = interaction.guildId;
     let settings = {};
 
-    // Check if settings file exists
     if (fs.existsSync(settingsPath)) {
       settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
     }
 
-    console.log("Loaded settings:", settings); // ✅ Debug: Log settings
+    //console.log("Loaded settings:", settings);
 
-    // Ensure `utcHour` is retrieved correctly
-    const utcHour = settings[guildId]?.utcHour ?? 18; // Default 18 UTC
-    console.log(`Guild: ${guildId}, UTC Hour: ${utcHour}`); // ✅ Debug log
+    const utcHour = settings[guildId]?.utcHour ?? 18; // Default to 18 UTC
+    //console.log(`Guild: ${guildId}, UTC Hour: ${utcHour}`);
 
-    // Create UTC Date
-    const utcDate = new Date();
-    utcDate.setUTCHours(utcHour, 0, 0, 0);
+    let userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    // Check if time zone is detected
-    const userLocale = interaction.locale || "en-US";
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log(`User Locale: ${userLocale}, Time Zone: ${userTimeZone}`); // ✅ Debug log
-
-    if (!userTimeZone) {
-      return interaction.reply("⚠️ Time zone could not be detected.");
+    if (!userTimeZone || userTimeZone === "UTC") {
+      return interaction.reply(
+        "❌ No time zone detected. Please check your system settings."
+      );
     }
 
-    // Convert to local time
-    const formatter = new Intl.DateTimeFormat(userLocale, {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-      timeZone: userTimeZone,
-    });
+    /*console.log(
+      `User Locale: ${interaction.locale}, Time Zone: ${userTimeZone}`
+    );*/
 
-    const localTimeString = formatter.format(utcDate);
-    console.log("Converted Local Time:", localTimeString); // ✅ Debug log
+    const localTime = DateTime.utc()
+      .set({ hour: utcHour, minute: 0 })
+      .setZone(userTimeZone);
 
-    // Convert UTC time to 12-hour format
+    const localTimeString = localTime.toFormat("h a ZZZZ");
+
+    //console.log(`Converted Local Time: ${localTimeString}`);
+
     const utcHour12 = utcHour % 12 === 0 ? 12 : utcHour % 12;
     const utcPeriod = utcHour < 12 ? "AM" : "PM";
 
