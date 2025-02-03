@@ -7,9 +7,7 @@ const settingsPath = path.join(__dirname, "../../serverData.json");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("optime")
-    .setDescription(
-      "Shows the globally set UTC time in your local time for this server"
-    ),
+    .setDescription("Shows the globally set OP time in your local time. . ."),
 
   async execute(interaction) {
     const guildId = interaction.guildId;
