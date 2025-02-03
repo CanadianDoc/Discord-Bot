@@ -33,12 +33,28 @@ module.exports = {
 
     let settings = {};
     if (fs.existsSync(settingsPath)) {
-      settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+      try {
+        settings = JSON.parse(fs.readFileSync(settingsPath, "utf8"));
+      } catch (error) {
+        console.error("❌ Error reading serverData.json:", error);
+      }
+    }
+
+    // Ensure settings has correct structure
+    if (!settings || typeof settings !== "object") {
+      settings = {};
     }
 
     settings[guildId] = { utcHour };
 
-    fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 4), "utf8");
+    // ✅ **Fix: Use `fs.writeFileSync` safely**
+    try {
+      fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 4), "utf8");
+      console.log(`✅ Updated settings for ${guildId}:`, settings[guildId]);
+    } catch (error) {
+      console.error("❌ Error writing to serverData.json:", error);
+      return interaction.reply("❌ Failed to save the settings. Try again.");
+    }
 
     const utcHour12 = utcHour % 12 === 0 ? 12 : utcHour % 12;
     const utcPeriod = utcHour < 12 ? "AM" : "PM";
