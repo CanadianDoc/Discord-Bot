@@ -22,7 +22,6 @@
     "axios": "^1.6.2",
     "discord-api-types": "^0.37.65",
     "discord.js": "^14.14.1",
-    "luxon": "^3.5.0",
     "openai": "^4.68.1",
     "undici": "^7.3.0",
     "whatwg-url": "^14.0.0"
