@@ -17,11 +17,11 @@ const timeZones = {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("optime")
-    .setDescription("Shows the globally set OP time in your local time.")
+    .setDescription("Shows the OP time in your selected local time. . .")
     .addStringOption((option) =>
       option
         .setName("timezone")
-        .setDescription("Choose your local time zone (Required)")
+        .setDescription("Choose your local time zone. . .")
         .setRequired(true)
         .addChoices(
           { name: "Pacific Time (PST)", value: "PST" },
