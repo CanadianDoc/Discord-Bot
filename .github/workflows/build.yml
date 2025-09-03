@@ -22,5 +22,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:main
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/canadianDoc/discord-bot:main
+            ghcr.io/ghcr.io/canadianDoc/discord-Bot:${{ github.sha }}
