@@ -32,5 +32,5 @@ jobs:
           # amd64 for Linux/Ubuntu Servers, arm64 for Pi5s
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ github.repository_owner }}/discord-bot:main
-            ghcr.io/${{ github.repository_owner }}/discord-bot:${{ github.sha }}
+            ghcr.io/canadiandoc/discordbot:main
+            ghcr.io/canadiandoc/discordbot:${{ github.sha }}
